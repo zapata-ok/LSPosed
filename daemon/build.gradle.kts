@@ -119,11 +119,11 @@ android.applicationVariants.all {
 dependencies {
     implementation(libs.libxposed.`interface`)
     implementation(libs.agp.apksig)
+    implementation(libs.picocli)
     implementation(projects.apache)
     implementation(projects.hiddenapi.bridge)
     implementation(projects.services.daemonService)
     implementation(projects.services.managerService)
-    implementation("info.picocli:picocli:4.7.6")
     compileOnly(libs.androidx.annotation)
     compileOnly(projects.hiddenapi.stubs)
 }
