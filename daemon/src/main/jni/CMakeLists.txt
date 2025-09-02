@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.10)
 project(daemon)
 
+message(WARNING ">>> Start daemon cmake")
+
 add_subdirectory(${EXTERNAL_ROOT} external)
 
 set(SOURCES

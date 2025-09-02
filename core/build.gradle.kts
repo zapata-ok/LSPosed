@@ -28,7 +28,7 @@ android {
     namespace = "org.lsposed.lspd.core"
 
     buildFeatures {
-        androidResources = false
+        android.androidResources.enable = true
         buildConfig = true
     }
 
@@ -56,7 +56,7 @@ copy {
 }
 
 dependencies {
-    api(libs.libxposed.api)
+    api(project(":libs:xposed"))
     implementation(projects.apache)
     implementation(projects.axml)
     implementation(projects.hiddenapi.bridge)

@@ -13,14 +13,6 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        mavenLocal {
-            content {
-                includeGroup("io.github.libxposed")
-            }
-        }
-    }
-    versionCatalogs {
-        create("libs")
     }
 }
 
@@ -30,6 +22,8 @@ include(
     ":app",
     ":axml",
     ":core",
+    ":libs",
+    ":libs:xposed",
     ":daemon",
     ":dex2oat",
     ":hiddenapi:stubs",
