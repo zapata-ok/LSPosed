@@ -127,8 +127,8 @@ int main(int argc, char** argv) {
     // Use std::string for safe and easy string construction.
     std::string ld_preload_env =
         "LD_PRELOAD=/proc/" + std::to_string(getpid()) + "/fd/" + std::to_string(hooker_fd);
-    putenv(const_cast<char*>(ld_preload_env.c_str()));
-    LOGD("Set env %s", ld_preload_env.c_str());
+    // putenv(const_cast<char*>(ld_preload_env.c_str()));
+    LOGD("[dry_run] Set env %s", ld_preload_env.c_str());
 
     // fexecve requires a non-const char* array. We must use const_cast to match the
     // required signature, as is common when interfacing modern C++ with older C APIs.
