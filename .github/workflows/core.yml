@@ -24,7 +24,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           submodules: recursive
           fetch-depth: 0
@@ -41,20 +41,20 @@ jobs:
           fi
 
       - name: Checkout libxposed/api
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: libxposed/api
           path: libxposed/api
           ref: 54582730315ba4a3d7cfaf9baf9d23c419e07006
 
       - name: Checkout libxposed/service
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: libxposed/service
           path: libxposed/service
 
       - name: Setup Java
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: 21
