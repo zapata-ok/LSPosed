@@ -52,6 +52,7 @@ import androidx.annotation.Nullable;
 import org.lsposed.lspd.models.Application;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -344,11 +345,37 @@ public class PackageService {
         pm.clearApplicationProfileData(packageName);
     }
 
-    public static boolean performDexOptMode(String packageName) throws RemoteException {
+	public static boolean performDexOptMode(String packageName) throws RemoteException {
         IPackageManager pm = getPackageManager();
-        if (pm == null) return false;
-        return pm.performDexOptMode(packageName,
-                SystemProperties.getBoolean("dalvik.vm.usejitprofiles", false),
-                SystemProperties.get("pm.dexopt.install", "speed-profile"), true, true, null);
+        if (pm == null) {
+            return false;
+        }
+
+        try {
+            // Get the Class object for the IPackageManager interface
+            Class<?> iPackageManagerClass = pm.getClass();
+
+            // Get the method signature
+            Method performDexOptModeMethod = iPackageManagerClass.getMethod("performDexOptMode",
+                    String.class, boolean.class, String.class, boolean.class, boolean.class, String.class);
+
+            // Invoke the method if it exists
+            return (boolean) performDexOptModeMethod.invoke(pm,
+                    packageName,
+                    SystemProperties.getBoolean("dalvik.vm.usejitprofiles", false),
+                    SystemProperties.get("pm.dexopt.install", "speed-profile"),
+                    true,
+                    true,
+                    null);
+
+        } catch (NoSuchMethodException e) {
+            // Method does not exist on this Android 16 beta qpr2, handle gracefully.
+            Log.e(TAG, "failed to get method at runtime", e);
+            return false;
+        } catch (IllegalAccessException | InvocationTargetException e) {
+            // Handle other reflection-related exceptions
+            Log.e(TAG, "reflection failed", e);
+            throw new RuntimeException(e);
+        }
     }
 }
