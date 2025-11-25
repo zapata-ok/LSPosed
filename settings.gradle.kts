@@ -32,6 +32,7 @@ include(
     ":core",
     ":daemon",
     ":dex2oat",
+    ":libs:xposed",
     ":hiddenapi:stubs",
     ":hiddenapi:bridge",
     ":magisk-loader",

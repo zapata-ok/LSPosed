@@ -45,7 +45,7 @@ cmaker {
         )
         cFlags.addAll(flags)
         cppFlags.addAll(flags)
-        abiFilters("arm64-v8a", "armeabi-v7a", "x86", "x86_64")
+        abiFilters("arm64-v8a", "armeabi-v7a") // , "x86", "x86_64"
     }
     buildTypes {
         if (it.name == "release") {
@@ -87,7 +87,7 @@ subprojects {
 
             externalNativeBuild {
                 cmake {
-                    version = "3.29.8+"
+                    version = "4.1.0"
                     buildStagingDirectory = layout.buildDirectory.get().asFile
                 }
             }
